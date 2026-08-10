@@ -21,14 +21,14 @@ def get_int_input(prompt):
                 print("아무것도 입력되지 않았습니다. 다시 입력해 주세요\n")
                 continue
             
-            elif not 1<= int(user_input) <=2:
-                print("1번과 2번 중에 골라주세요\n")
+            elif not 1<= int(user_input) <=3:
+                print("1 ~ 3번 중에 골라주세요\n")
                 continue
+
+            return user_input
 
         except ValueError:
             print("숫자만 입력해 주세요\n")
         except (KeyboardInterrupt, EOFError):
             if handle_exit():
                 return None
-
-            
