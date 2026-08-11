@@ -1,4 +1,6 @@
 from exception import get_int_input
+import function1
+import function2
 
 def menu():
     print('''
@@ -12,16 +14,15 @@ def menu():
     while True:  
         choice = int(get_int_input("선택:"))
         if choice == 1: 
-            pass
-            #1번으로 가는 코드 구현
+            function1.main()
+
         elif choice == 2:
-            pass
-            #2번으로 가는 코드 구현
+            function2.main()
+
         elif choice == 3:
             print("\n프로그램을 종료합니다")
             break
    
-    
 if __name__ == "__main__":
     menu()
 
