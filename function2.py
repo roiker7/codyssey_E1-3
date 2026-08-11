@@ -18,7 +18,7 @@ def result_print(cross_score, X_score, pattern_name, answers):
         p_or_f = "FAIL"
 
     # 패턴 분석 출력
-    print(f"- -- {pattern_name} ---")
+    print(f"--[{pattern_name}]--")
     print(f"Cross 점수: {cross_score}")
     print(f"X 점수: {X_score}")
     print(f"판정: {result} | expected: {answers} | {p_or_f}")
@@ -100,7 +100,6 @@ def calculate(json_file_path):
         avg_time = sum(info["times"]) / len(info["times"])
         op_count = info["count"]
         print(f"{size_str:<9}{avg_time:<16.3f}{op_count:<20}")
-    print('\n\n\n')
 
 
 def main():
