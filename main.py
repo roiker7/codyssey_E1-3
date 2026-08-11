@@ -1,7 +1,7 @@
-import menu
+from menu import Menu 
 
 def Main():
-    menu()
+    Menu()  
 
-if __name__ == "__main__":
+if __name__ == '__main__':
     Main()
