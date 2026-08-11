@@ -33,6 +33,7 @@ def user_input(prompt):
     return matrix
             
 def main():
+
     filters = [] # 2개의 필터를 저장하는 리스트
     patter = [] # 판별 하고 싶은 패턴을 저장하는 리스트
     print("\n\n\n#---------------------------------------")
