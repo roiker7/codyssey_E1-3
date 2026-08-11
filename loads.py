@@ -1,8 +1,8 @@
 import json
 
-def validate_and_process_patterns():
+def validate_and_process_patterns(json_file_path):
+
     # 1. 파일 읽기 ('r' 모드)
-    json_file_path = "data.json"
     try:
         with open(json_file_path, 'r', encoding='utf-8') as f:
             data = json.load(f)
@@ -95,11 +95,15 @@ def validate_and_process_patterns():
         }
 
     # 결과 출력
+    print("\n#--------------------------------------")
+    print("# [1] 필터 로드")
+    print("#--------------------------------------")
     for key, info in results.items():
         if info["status"] == "FAIL":
             print(f"[{key}]로드 실패 - 원인: {info['reason']}")
         else:
             print(f"[{key}] 필터 로드 성공")
 
+
 if __name__ == "__main__":
-    validate_and_process_patterns()
+    validate_and_process_patterns("data.json")
