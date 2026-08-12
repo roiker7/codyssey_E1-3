@@ -28,7 +28,7 @@ def save_json_keep_rows(filename, data):
     with open(filename, "w", encoding="utf-8") as f:
         f.write(text)
         f.write("\n")
-    print("JSON파일에 저장 완료")
+    print("** JSON 파일에 저장 완료 **")
 
 def validate_size(n: int):
     """
