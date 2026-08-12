@@ -1,6 +1,9 @@
 from exception import get_int_input
 import function1
 import function2
+import generator
+
+datapath = "data.json"
 
 def Menu():
     while True:  
@@ -11,7 +14,8 @@ def Menu():
 
 1. 사용자 입력 (3x3)
 2. data.json 분석
-3. 프로그램 종료
+3. 패턴 자동 생성
+4. 프로그램 종료
         ''')
         choice = int(get_int_input("선택:"))
         if choice == 1: 
@@ -21,6 +25,10 @@ def Menu():
             function2.main()
 
         elif choice == 3:
+            n = int(input("만들고 싶은 배열의 크기 입력:"))
+            generator.add_patterns_to_json(datapath,n)
+
+        elif choice == 4:
             print("\n프로그램을 종료합니다")
             break
    
