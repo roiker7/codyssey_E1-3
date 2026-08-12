@@ -28,7 +28,7 @@ def save_json_keep_rows(filename, data):
     with open(filename, "w", encoding="utf-8") as f:
         f.write(text)
         f.write("\n")
-
+    print("JSON파일에 저장 완료")
 
 def validate_size(n: int):
     """
@@ -157,10 +157,6 @@ def add_patterns_to_json(json_path, n):
     # JSON 저장
     save_json_keep_rows("data.json", data)
 
-    return {
-        "added": [x_key, cross_key],
-        "message": f"{json_path}에 {x_key}, {cross_key} 패턴이 추가되었습니다."
-    }
 
 
 # 테스트 코드
