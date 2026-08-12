@@ -3,6 +3,32 @@ import re
 import shutil
 from pathlib import Path
 
+# 저장 형태 통일성을 유지 하기 위한 함수
+def save_json_keep_rows(filename, data):
+    # 먼저 일반적인 예쁜 JSON 형태로 변환
+    text = json.dumps(data, ensure_ascii=False, indent=4)
+
+    # 숫자 패턴
+    number = r"-?\d+(?:\.\d+)?(?:[eE][+-]?\d+)?"
+
+    # 숫자만 들어있는 배열을 찾는 패턴
+    pattern = re.compile(
+        r"\[\s*(" + number + r"(?:\s*,\s*" + number + r")*)\s*\]"
+    )
+
+    # 세로로 풀린 숫자 배열을 한 줄로 바꾸는 함수
+    def replace_array(match):
+        nums = re.findall(number, match.group(1))
+        return "[" + ", ".join(nums) + "]"
+
+    # 숫자 배열만 한 줄로 압축
+    text = pattern.sub(replace_array, text)
+
+    # 파일 저장
+    with open(filename, "w", encoding="utf-8") as f:
+        f.write(text)
+        f.write("\n")
+
 
 def validate_size(n: int):
     """
@@ -83,7 +109,7 @@ def get_next_pattern_index(patterns: dict, n: int):
     return max_index + 1
 
 
-def add_patterns_to_json(json_path: str, n: int, make_backup: bool = True):
+def add_patterns_to_json(json_path, n):
     """
     data.json 파일에 X 패턴과 십자가 패턴을 자동 추가합니다.
 
@@ -128,14 +154,8 @@ def add_patterns_to_json(json_path: str, n: int, make_backup: bool = True):
         "expected": "+"
     }
 
-    # 백업 파일 생성
-    if make_backup:
-        backup_path = path.with_suffix(path.suffix + ".bak")
-        shutil.copy2(path, backup_path)
-
     # JSON 저장
-    with path.open("w", encoding="utf-8") as file:
-        json.dump(data, file, ensure_ascii=False, indent=4)
+    save_json_keep_rows("data.json", data)
 
     return {
         "added": [x_key, cross_key],
@@ -143,7 +163,7 @@ def add_patterns_to_json(json_path: str, n: int, make_backup: bool = True):
     }
 
 
-# 사용 예시
+# 테스트 코드
 if __name__ == "__main__":
     result = add_patterns_to_json("data.json", 7)
     print(result)
