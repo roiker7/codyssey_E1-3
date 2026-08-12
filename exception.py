@@ -21,8 +21,8 @@ def get_int_input(prompt):
                 print("아무것도 입력되지 않았습니다. 다시 입력해 주세요\n")
                 continue
             
-            elif not 1<= int(user_input) <=3:
-                print("1 ~ 3번 중에 골라주세요\n")
+            elif not 1<= int(user_input) <=4:
+                print("1 ~ 4번 중에 골라주세요\n")
                 continue
 
             return user_input
