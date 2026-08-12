@@ -12,16 +12,21 @@ def result_print(cross_score, X_score, pattern_name, answers):
         result = "X"
 
     # 정답 여부
+    p_flag ,f_flag = 0, 0 # 통과가 몇개인지 세기 위한 변수
     if answers == result:
         p_or_f = "PASS" 
+        p_flag = 1
     else:
         p_or_f = "FAIL"
+        f_flag = 1
 
     # 패턴 분석 출력
     print(f"--[{pattern_name}]--")
     print(f"Cross 점수: {cross_score}")
     print(f"X 점수: {X_score}")
     print(f"판정: {result} | expected: {answers} | {p_or_f}")
+
+    return p_flag ,f_flag
 
 
 def standard(input_val: str):
@@ -68,6 +73,8 @@ def calculate(json_file_path):
     print("# [2] 패턴 분석 (라벨 정규화 적용)")
     print("#---------------------------------------")
 
+    Fail_case = []
+    p_cnt ,f_cnt = 0 ,0
     for pattern_key, pattern_val in patterns.items():
         p_size = int(pattern_key.split('_')[1])
         input_matrix = pattern_val.get("input")
@@ -81,9 +88,12 @@ def calculate(json_file_path):
             if p_size == f_size:
                 sum1, sum2, ave_time, count = MAC(input_matrix, cross_matrix, X_matrix, f_size)
                 
-                # 패턴 분석 결과 즉시 출력
-                result_print(sum1, sum2, pattern_key, label)
-
+                # 패턴 분석 결과 즉시 출력 및 결과 요약 데이터 수집
+                a ,b = result_print(sum1, sum2, pattern_key, label)
+                p_cnt += a
+                f_cnt += b
+                if b:
+                    Fail_case.append(pattern_key)
                 # 성능 분석 출력을 위한 데이터 수집
                 size_str = f"{f_size}x{f_size}"
                 if size_str not in perf_data:
@@ -101,7 +111,15 @@ def calculate(json_file_path):
         op_count = info["count"]
         print(f"{size_str:<9}{avg_time:<16.3f}{op_count:<20}")
 
-
+    print("\n\n\n#---------------------------------------")
+    print("# [4] 결과 요약")
+    print("#---------------------------------------")
+    print(f"총 테스트: {p_cnt+f_cnt}")
+    print(f"통과: {p_cnt}")
+    print(f"실패: {f_cnt}\n")
+    print("실패 케이스:")
+    for i in Fail_case:        
+        print(f"- {i}: 동점(UNDECIDED) 처리 규칙에 따라 FAIL")
 def main():
     file_name = "data.json"
     validate_and_process_patterns(file_name)
