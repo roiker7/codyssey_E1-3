@@ -15,7 +15,7 @@ def validate_and_process_patterns(json_file_path):
 
     # 2. patterns 항목 순회
     for pattern_key, pattern_val in patterns.items():
-        # 키 파싱 (size_{N}_{idx} 형태)
+        # 키 (size_{N}_{idx} 형태)
         parts = pattern_key.split('_')
         
         # 키 형식이 잘못된 경우
@@ -41,7 +41,7 @@ def validate_and_process_patterns(json_file_path):
         if expected_filter_key not in filters:
             results[pattern_key] = {
                 "status": "FAIL",
-                "reason": f"필터키 '{expected_filter_key}'가 filters 항목에 존재하지 않습니다."
+                "reason": f"필터 '{expected_filter_key}'가 filters 항목에 존재하지 않습니다."
             }
             continue
 
