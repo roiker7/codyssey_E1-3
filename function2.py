@@ -82,8 +82,8 @@ def calculate(json_file_path):
 
         for filter_key, filter_val in filters.items():
             f_size = int(filter_key.split('_')[1]) 
-            cross_matrix = standard(filter_val.get("cross")) # 정규화된 라벨
-            X_matrix = standard(filter_val.get("x")) # 정규화된 라벨
+            cross_matrix = (filter_val.get("cross")) # 정규화된 라벨
+            X_matrix = filter_val.get("x") # 정규화된 라벨
 
             if p_size == f_size:
                 sum1, sum2, ave_time, count = MAC(input_matrix, cross_matrix, X_matrix, f_size)
