@@ -104,9 +104,20 @@ $ python main.py
    
 ![](screen/프로그램종료.png)
 
-
-
-
+## 주요 구현 방식 설명
+- 라벨 정규화 방식
+```
+def standard(input_val: str):
+    LABEL_MAP = {
+        '+': 'Cross',
+        'cross': 'Cross',
+        'x': 'X'
+    }
+    if not input_val:
+        return input_val
+    cleaned = input_val.strip().lower()
+    return LABEL_MAP.get(cleaned, input_val)
+```
 
 
 
