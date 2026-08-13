@@ -2,9 +2,11 @@ import time
 
 N = 3
 REPEAT = 10
+cnt_1d,cnt_2d = 0, 0
 
 # 2차원 배열 계산 함수
 def calculate_2d(fil, pat):
+    global cnt_2d
     ave_time, times = 0, 0
 
     for _ in range(REPEAT):
@@ -14,6 +16,7 @@ def calculate_2d(fil, pat):
         for y in range(N):
             for x in range(N):
                 total += fil[y][x] * pat[y][x]
+                cnt_2d += 1
 
         end = time.perf_counter()  # 시간 끝
         times += ((end - start) * 1000) 
@@ -23,6 +26,7 @@ def calculate_2d(fil, pat):
 
 # 1차원 배열 계산 함수
 def calculate_1d(fil, pat):
+    global cnt_1d
     ave_time, times = 0, 0
 
     for _ in range(REPEAT):
@@ -31,6 +35,7 @@ def calculate_1d(fil, pat):
         total = 0
         for i in range(N * N):
             total += fil[i] * pat[i]
+            cnt_1d += 1
 
         end = time.perf_counter()  # 시간 끝
         times += ((end - start) * 1000)
@@ -144,6 +149,7 @@ B 계산 시간(평균/{REPEAT}회): {B_time_1d:.5f} ms
 #----------------------------------------
 # [6] 성능향상 총평
 #----------------------------------------
+총 연산 횟수: 1차원 배열 {cnt_1d}회, 2차원 배열 {cnt_2d}회
 1차원 배열의 계산이 2차원에 비해 {persentage:.2f}% 더 빠르다
 
 ''')
