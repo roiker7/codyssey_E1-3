@@ -5,7 +5,7 @@ REPEAT = 10
 
 # 2차원 배열 계산 함수
 def calculate_2d(fil, pat):
-    ave_time = 0
+    ave_time, times = 0, 0
 
     for _ in range(REPEAT):
         start = time.perf_counter()  # 시간 시작
@@ -16,14 +16,14 @@ def calculate_2d(fil, pat):
                 total += fil[y][x] * pat[y][x]
 
         end = time.perf_counter()  # 시간 끝
-        ave_time += ((end - start) * 1000) / REPEAT
-
+        times += ((end - start) * 1000) 
+    ave_time = times / REPEAT
     return total, ave_time
 
 
 # 1차원 배열 계산 함수
 def calculate_1d(fil, pat):
-    ave_time = 0
+    ave_time, times = 0, 0
 
     for _ in range(REPEAT):
         start = time.perf_counter()  # 시간 시작
@@ -33,8 +33,8 @@ def calculate_1d(fil, pat):
             total += fil[i] * pat[i]
 
         end = time.perf_counter()  # 시간 끝
-        ave_time += ((end - start) * 1000) / REPEAT
-
+        times += ((end - start) * 1000)
+    ave_time = times / REPEAT
     return total, ave_time
 
 
@@ -92,11 +92,9 @@ def main():
     filters_1d = [flatten_matrix(f) for f in filters_2d]
     pattern_1d = flatten_matrix(pattern_2d)
 
-
     # 2차원 방식 계산
     A_score_2d, A_time_2d = calculate_2d(filters_2d[0], pattern_2d)
     B_score_2d, B_time_2d = calculate_2d(filters_2d[1], pattern_2d)
-
 
     # 1차원 방식 계산  
     A_score_1d, A_time_1d = calculate_1d(filters_1d[0], pattern_1d)
@@ -106,17 +104,18 @@ def main():
     if  A_score_1d != A_score_2d or B_score_1d != B_score_2d:
         print("1차원과 2차원의 결과 값이 다릅니다.")
         return 
-    total_time_2d = A_time_2d + B_time_2d
-    total_time_1d = A_time_1d + B_time_1d
-    persentage = ((total_time_2d - total_time_1d)/total_time_1d)*100
-
-    # 2차원 계산 결과를 기준으로 판정
-    if abs(A_score_2d - B_score_2d) < 1e-9:
-        result = "판정 불가 (|A-B| < 1e-9)"
-    elif A_score_2d > B_score_2d:
-        result = "A"
     else:
-        result = "B"
+        total_time_2d = A_time_2d + B_time_2d
+        total_time_1d = A_time_1d + B_time_1d
+        persentage = ((total_time_2d - total_time_1d)/total_time_1d)*100
+
+        # 2차원 계산 결과를 기준으로 판정
+        if abs(A_score_2d - B_score_2d) < 1e-9:
+            result = "판정 불가 (|A-B| < 1e-9)"
+        elif A_score_2d > B_score_2d:
+            result = "A"
+        else:
+            result = "B"
 
 
     # 결과 출력
