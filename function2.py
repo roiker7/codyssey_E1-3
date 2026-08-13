@@ -99,6 +99,8 @@ def calculate(json_file_path):
                 if size_str not in perf_data:
                     perf_data[size_str] = {"times": [], "count": count}
                 perf_data[size_str]["times"].append(ave_time)
+        else:
+            print("필터와 패턴의 크기가 일치하지 않습니다. 분석을 건너뜁니다.")
 
     print("\n\n\n#---------------------------------------")
     print("# [3] 성능 분석 (평균/10회)")
