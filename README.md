@@ -22,7 +22,7 @@ import re
 2. 메인 파일로 이동
 3. 실행
 ```
-$ git clone https://github.com/roiker7/codyssey_E1-3.guit
+$ git clone https://github.com/roiker7/codyssey_E1-3.git
 $ cd main
 $ python main.py
 ```
