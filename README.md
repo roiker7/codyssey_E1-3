@@ -81,16 +81,16 @@ $ python main.py
 <br><br>
 
 - 사용자로 부터 숫자를 입력 받고 랜덤으로 패턴 생성
-![](screen/랜덤패턴생성.png)
+![](screen/랜덤패턴_생성.png)
 <br><br>
 
 - 랜덤으로 생성된 패턴이 올바르게 json파일에 저장되어 있는지 확인
-![](screen/랜덤생성확인.png)
+![](screen/랜덤패턴_생성확인.png)
 <br><br>
 
 - 모드 2번실행시 json파일에 저장되어 있는 데이터를 베이스로 작동
-![](screen/모드2_실행_1.png)
-![](screen/모드2_실행_2.png)
+![](screen/모드2_실행1.png)
+![](screen/모드2_실행2.png)
 <br><br>
 
 - 프로그램을 종료할 때
