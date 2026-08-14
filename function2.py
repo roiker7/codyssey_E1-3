@@ -34,6 +34,7 @@ def standard(input_val: str):
         '+': 'Cross',
         'cross': 'Cross',
         'x': 'X'
+        #'o': 'O','circle'
     }
     if not input_val:
         return input_val
