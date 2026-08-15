@@ -13,7 +13,7 @@ def handle_exit():
         print("\n프로그램을 종료합니다")
         sys.exit(0)
 
-def get_int_input(prompt):
+def get_int_input(prompt,min ,max):
     while True:
         try:
             user_input=input(prompt).strip()
@@ -21,8 +21,8 @@ def get_int_input(prompt):
                 print("아무것도 입력되지 않았습니다. 다시 입력해 주세요\n")
                 continue
             
-            elif not 1<= int(user_input) <=4:
-                print("1 ~ 4번 중에 골라주세요\n")
+            elif not min<= int(user_input) <=max:
+                print(f"{min} ~ {max}번 중에 골라주세요\n")
                 continue
 
             return user_input
