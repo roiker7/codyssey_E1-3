@@ -26,7 +26,7 @@ def Menu():
 
         elif choice == 3:
             n = int(input("만들고 싶은 배열의 크기 입력:"))
-            generator.add_patterns_to_json(datapath,n)
+            generator.make_patterns_filters(datapath,n)
 
         elif choice == 4:
             print("\n프로그램을 종료합니다")
